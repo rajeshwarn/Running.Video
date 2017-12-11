@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video", "Running.Video\Running.Video.csproj", "{D0C5E295-8CD6-435F-85EB-4D02120D2C50}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.Tests", "Running.Video.Tests\Running.Video.Tests.csproj", "{B36BBBD7-8ACB-48A1-AAA3-D9AB52776968}"
+	ProjectSection(ProjectDependencies) = postProject
+		{9905090F-40E6-4970-ADD8-D628A8C709F3} = {9905090F-40E6-4970-ADD8-D628A8C709F3}
+		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D} = {8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}
+		{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3} = {E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.FFMPEG", "Running.Video.FFMPEG\Running.Video.FFMPEG.csproj", "{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.LibVLC", "Running.Video.LibVLC\Running.Video.LibVLC.csproj", "{9905090F-40E6-4970-ADD8-D628A8C709F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.GSTREAMER", "Running.Video.GSTREAMER\Running.Video.GSTREAMER.csproj", "{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D0C5E295-8CD6-435F-85EB-4D02120D2C50}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C5E295-8CD6-435F-85EB-4D02120D2C50}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C5E295-8CD6-435F-85EB-4D02120D2C50}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C5E295-8CD6-435F-85EB-4D02120D2C50}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B36BBBD7-8ACB-48A1-AAA3-D9AB52776968}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B36BBBD7-8ACB-48A1-AAA3-D9AB52776968}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B36BBBD7-8ACB-48A1-AAA3-D9AB52776968}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B36BBBD7-8ACB-48A1-AAA3-D9AB52776968}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E29B4BE3-D777-4314-BAFE-1BEAB44D7AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9905090F-40E6-4970-ADD8-D628A8C709F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9905090F-40E6-4970-ADD8-D628A8C709F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9905090F-40E6-4970-ADD8-D628A8C709F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9905090F-40E6-4970-ADD8-D628A8C709F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
