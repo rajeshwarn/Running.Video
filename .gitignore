@@ -288,4 +288,5 @@ __pycache__/
 *.odx.cs
 *.xsd.cs
 
-videos/saida/
+videos/
+_video_/

@@ -2,9 +2,11 @@
 {
   public enum ConversionStateEnum
   {
-    NaoIniciado = 1,
-    Iniciado = 2,
-    FinalizadoComSucesso = 3,
-    Erro = 4
+    NotStarted = 0,
+    InProgress = 1,
+    Cancelled = 2,
+    Error = 3,
+    Timeout = 4,
+    Success = 5
   }
 }

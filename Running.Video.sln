@@ -18,6 +18,33 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.LibVLC", "Run
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.GSTREAMER", "Running.Video.GSTREAMER\Running.Video.GSTREAMER.csproj", "{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFmpeg", "FFmpeg\FFmpeg.csproj", "{C01178B4-A869-45F8-9B2B-7683F9EBB53D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EmergenceGuardian.FFmpeg", "EmergenceGuardian.FFmpeg", "{0E01D2FF-1FCD-44FC-BE6A-2A451ACACBDB}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Site", "Site\", "{F3F2A9C2-D7E6-4E32-B490-D669A741D569}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.5.2"
+		ProjectReferences = "{e29b4be3-d777-4314-bafe-1beab44d7ae3}|Running.Video.FFMPEG.dll;{C01178B4-A869-45F8-9B2B-7683F9EBB53D}|FFmpeg.dll;{D0C5E295-8CD6-435F-85EB-4D02120D2C50}|Running.Video.dll;"
+		Debug.AspNetCompiler.VirtualPath = "/localhost_50851"
+		Debug.AspNetCompiler.PhysicalPath = "Site\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50851\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/localhost_50851"
+		Release.AspNetCompiler.PhysicalPath = "Site\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\localhost_50851\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50851"
+		SlnRelativePath = "Site\"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -44,8 +71,19 @@ Global
 		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C8228AB-0F9F-46CE-B6FC-37F3490E0E9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C01178B4-A869-45F8-9B2B-7683F9EBB53D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C01178B4-A869-45F8-9B2B-7683F9EBB53D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C01178B4-A869-45F8-9B2B-7683F9EBB53D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C01178B4-A869-45F8-9B2B-7683F9EBB53D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Release|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Release|Any CPU.Build.0 = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{C01178B4-A869-45F8-9B2B-7683F9EBB53D} = {0E01D2FF-1FCD-44FC-BE6A-2A451ACACBDB}
 	EndGlobalSection
 EndGlobal
