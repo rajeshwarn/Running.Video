@@ -5,11 +5,11 @@ namespace Running.Video
 {
   public class ConversionCompletedEventArgs
   {
-    public ConversionCompletedEventArgs(ConversionStateEnum state)
+    public ConversionCompletedEventArgs(ConversionStatusEnum state)
     {
       Status = state;
     }
-    public ConversionStateEnum Status { get; private set; }
+    public ConversionStatusEnum Status { get; private set; }
     public MasterPlayList MasterPlayList { get; set; } = new MasterPlayList();
     public TimeSpan Duration { get; set; }
     

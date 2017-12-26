@@ -11,9 +11,9 @@ public partial class Video : System.Web.UI.Page
 {
   protected void Page_Load(object sender, EventArgs e)
   {
-    dG.DataSource =
-      GerenciadorDeProcessamentoDeVideo.TodosProcessamentos;
-    dG.DataBind();
+    //dG.DataSource =
+    //  GerenciadorDeProcessamentoDeVideo.TodosProcessamentos;
+    //dG.DataBind();
   }
 
   protected void Unnamed2_Click(object sender, EventArgs e)
@@ -23,15 +23,15 @@ public partial class Video : System.Web.UI.Page
     {
       foreach (var file in fUp.PostedFiles) {
         var newName = Regex.Replace(file.FileName, @"[^a-zA-Z0-9\.\-_]+?", "_");
-        fUp.SaveAs(
+        file.SaveAs(
           Path.Combine(Server.MapPath("~/_video_/in"), newName)
         );
-        GerenciadorDeProcessamentoDeVideo.ColocarNaFila(newName);
+        //GerenciadorDeProcessamentoDeVideo.ColocarNaFila(newName);
       }
     }
-    dG.DataSource =
-      GerenciadorDeProcessamentoDeVideo.TodosProcessamentos;
-    dG.DataBind();
+    //dG.DataSource =
+    //  GerenciadorDeProcessamentoDeVideo.TodosProcessamentos;
+    //dG.DataBind();
 
 
   }

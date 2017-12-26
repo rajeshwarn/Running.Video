@@ -1,6 +1,6 @@
 ﻿namespace Running.Video
 {
-  public enum ConversionStateEnum
+  public enum ConversionStatusEnum
   {
     NotStarted = 0,
     InProgress = 1,

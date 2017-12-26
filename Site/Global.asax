@@ -9,7 +9,7 @@
     {
         RouteConfig.RegisterRoutes(RouteTable.Routes);
         BundleConfig.RegisterBundles(BundleTable.Bundles);
-        GerenciadorDeProcessamentoDeVideo.Inicializar();
+        //GerenciadorDeProcessamentoDeVideo.Inicializar();
     }
 
 </script>

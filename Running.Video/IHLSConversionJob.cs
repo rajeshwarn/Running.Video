@@ -8,11 +8,13 @@ namespace Running.Video
 {
   public interface IHLSConversionJob
   {
-    void SetSource(string arquivo);
+    SourceInfo SetSource(string arquivo);
     SourceInfo SourceInfo { get; }
-    void StartConversion(string destinationFolder);
-    ConversionStateEnum State { get; }
+    string StartConversion(string destinationFolder);
+    ConversionStatusEnum State { get; }
+    object Tag { get; set; }
     event EventHandler<ConversionProgressEventArgs> OnProgress;
     event EventHandler<ConversionCompletedEventArgs> OnComplete;
+
   }
 }

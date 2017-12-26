@@ -19,9 +19,9 @@ namespace Running.Video.FFMPEG
 
     string _source = null;
     bool _sourceOK = false;
-    ConversionStateEnum _state = ConversionStateEnum.NotStarted;
+    ConversionStatusEnum _state = ConversionStatusEnum.NotStarted;
     FFmpegProcess fi;
-    TimeLeftCalculator _timeLeftCalc = null;//= //new TimeLeftCalculator
+    //TimeLeftCalculator _timeLeftCalc = null;//= //new TimeLeftCalculator
     FFmpegProcess _mediaInfo = null;
     SourceInfo _sourceInfo;
     long _startTicks;
@@ -30,6 +30,8 @@ namespace Running.Video.FFMPEG
     public event EventHandler<ConversionProgressEventArgs> OnProgress;
     public event EventHandler<ConversionCompletedEventArgs> OnComplete;
     string _destinationFolder = string.Empty;
+
+    public object Tag { get; set; }
 
     //[InjectionConstructor]
     public HLSConversionJob()
@@ -68,7 +70,7 @@ namespace Running.Video.FFMPEG
       }
     }
     
-    public ConversionStateEnum State
+    public ConversionStatusEnum State
     {
       get { return _state; }
       private set { _state = value; }
@@ -79,7 +81,7 @@ namespace Running.Video.FFMPEG
     private bool vaiFazer640;
     private bool vaiFazer1280;
 
-    public void SetSource(string arquivo)
+    public SourceInfo SetSource(string arquivo)
     {
       _sourceOK = false;
       _source = string.Empty;
@@ -105,8 +107,8 @@ namespace Running.Video.FFMPEG
 
       _source = arquivo;
       _sourceOK = true;
+      return _sourceInfo;
     }
-
 
     private string GeraManifestoMaster()
     {
@@ -121,18 +123,26 @@ namespace Running.Video.FFMPEG
 
       return caminhoArquivo;
     }
-
-    public void StartConversion(string destinationFolder)
+    static object lockObj = new object(); 
+    public string StartConversion(string destinationFolder = null)
     {
 
-      if (State == ConversionStateEnum.InProgress)
-        return;
+      if (string.IsNullOrEmpty(destinationFolder))
+      {
+        destinationFolder = Path.Combine(System.Environment.GetEnvironmentVariable("TEMP"), Guid.NewGuid().ToString());
+        if (Directory.Exists(destinationFolder)) {
+          Directory.CreateDirectory(destinationFolder);
+        }
+      }
+
+      if (State == ConversionStatusEnum.InProgress)
+        return destinationFolder;
 
       _startTicks = DateTime.Now.Ticks;
-      State = ConversionStateEnum.InProgress;
-
+      State = ConversionStatusEnum.InProgress;
+      
       _destinationFolder = destinationFolder;
-      _timeLeftCalc = new TimeLeftCalculator(SourceInfo.FrameCount,400);
+      //_timeLeftCalc = new TimeLeftCalculator(SourceInfo.FrameCount,400);
       
       var dest320x180 = Path.Combine(destinationFolder, "320x180");
       if (vaiFazer320 && !Directory.Exists(dest320x180))
@@ -154,6 +164,13 @@ namespace Running.Video.FFMPEG
       fi = new FFmpegProcess(
         new ProcessStartOptions { Priority = ProcessPriorityClass.BelowNormal, DisplayMode = FFmpegDisplayMode.None }
       );
+      //lock (lockObj)
+      //{
+      //  if (fi1 == null && fi2 == null)
+      //    fi1 = fi;
+      //  else
+      //    fi2 = fi;
+      //}
 
       fi.Completed += Fi_Completed;
       fi.StatusUpdated += Fi_StatusUpdated;
@@ -163,9 +180,14 @@ namespace Running.Video.FFMPEG
         (!vaiFazer480 ? string.Empty : $" -c:a aac -strict experimental -ac 2 -b:a 64k -ar 44100 -c:v libx264 -pix_fmt yuv420p -profile:v baseline -level 2.1 -maxrate 500K -bufsize 2M -crf 18 -r 10 -g 30  -f hls -hls_time 9 -hls_list_size 0 -s 480x270 -hls_segment_filename \"{dest480x270}\\%03d.ts\" \"{dest480x270}\\{SEGMENT_MANIFEST_FILE_NAME}\"") +
         (!vaiFazer640 ? string.Empty : $" -c:a aac -strict experimental -ac 2 -b:a 96k -ar 44100 -c:v libx264 -pix_fmt yuv420p -profile:v baseline -level 3.1 -maxrate 1M -bufsize 3M -crf 18 -r 24 -g 72 -f hls -hls_time 9 -hls_list_size 0 -s 640x360 -hls_segment_filename \"{dest640x360}\\%03d.ts\" \"{dest640x360}\\{SEGMENT_MANIFEST_FILE_NAME}\"" ) +
         (!vaiFazer1280 ? string.Empty : $" -c:a aac -strict experimental -ac 2 -b:a 96k -ar 44100 -c:v libx264 -pix_fmt yuv420p -profile:v main -level 3.2 -maxrate 2M -bufsize 6M -crf 18 -r 24 -g 72 -f hls -hls_time 9 -hls_list_size 0 -s 1280x720  -hls_segment_filename \"{dest1280x720}\\%03d.ts\" \"{dest1280x720}\\{SEGMENT_MANIFEST_FILE_NAME}\"");
-
+      //System.Diagnostics.Debug.WriteLine(cmd);
       fi.RunFFmpeg(cmd);
+      
+      //Console.WriteLine(cmd);
 
+      
+      
+      return destinationFolder;
     }
 
     private TimeSpan ElapsedTime {
@@ -173,11 +195,10 @@ namespace Running.Video.FFMPEG
     }
     private void Fi_StatusUpdated(object sender, StatusUpdatedEventArgs e)
     {
-      var tempoEstimado =  _timeLeftCalc.Calculate(e.Status.Frame);
-      var porcentagemConclusao = //e.Status.Frame / (decimal)_mediaInfo.FrameCount;
+      var porcentagemConclusao = 
          e.Status.Time.Ticks / (decimal)SourceInfo.Duration.Ticks;
       lastFrame = e.Status.Frame;
-      OnProgress?.Invoke(this, new ConversionProgressEventArgs(tempoEstimado,porcentagemConclusao, ElapsedTime) );
+      OnProgress?.Invoke(this, new ConversionProgressEventArgs(porcentagemConclusao, ElapsedTime) );
     }
     long lastFrame = 0;
     private void Fi_Completed(object sender, CompletedEventArgs e)
@@ -186,20 +207,20 @@ namespace Running.Video.FFMPEG
       switch (e.Status)
       {
         case CompletionStatus.Cancelled:
-          State = ConversionStateEnum.Cancelled;
+          State = ConversionStatusEnum.Cancelled;
           break;
         case CompletionStatus.Error:
-          State = ConversionStateEnum.Error;
+          State = ConversionStatusEnum.Error;
           break;
         case CompletionStatus.Success:
-          State = ConversionStateEnum.Success;
+          State = ConversionStatusEnum.Success;
           break;
         case CompletionStatus.Timeout:
-          State = ConversionStateEnum.Timeout;
+          State = ConversionStatusEnum.Timeout;
           break;
       }
       var evArgs =  new ConversionCompletedEventArgs(State);
-      if (State == ConversionStateEnum.Success) {
+      if (State == ConversionStatusEnum.Success) {
         var caminho = GeraManifestoMaster();
         evArgs.MasterPlayList.Path = caminho;
       }
@@ -217,8 +238,6 @@ namespace Running.Video.FFMPEG
 
       if (vaiFazer1280)
         evArgs.MasterPlayList.AvaiablePlayLists.Add(ObtemPlayListPara("1280x720"));
-
-      //var oQueFez = new[] {  }
 
 
       OnComplete?.Invoke(this, evArgs);

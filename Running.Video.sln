@@ -45,6 +45,8 @@ Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "Site", "Site\", "{F3F2A9C2-
 		DefaultWebSiteLanguage = "Visual C#"
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Running.Video.AWS", "Running.Video.AWS\Running.Video.AWS.csproj", "{44D970B9-006C-433F-A565-A2AF2FCFF9B8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Release|Any CPU.ActiveCfg = Debug|Any CPU
 		{F3F2A9C2-D7E6-4E32-B490-D669A741D569}.Release|Any CPU.Build.0 = Debug|Any CPU
+		{44D970B9-006C-433F-A565-A2AF2FCFF9B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44D970B9-006C-433F-A565-A2AF2FCFF9B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44D970B9-006C-433F-A565-A2AF2FCFF9B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44D970B9-006C-433F-A565-A2AF2FCFF9B8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
